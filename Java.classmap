@@ -1,0 +1,21 @@
+Java:
+- java/lang/Object
+- java/lang/Class
+- java/lang/Iterable
+- java/util/Iterator
+- java/util/Collection
+- java/util/AbstractCollection
+- java/util/List
+- java/util/AbstractList
+- java/util/ArrayList
+- java/util/Map
+- java/util/Map$Entry
+- java/util/AbstractMap
+- java/util/AbstractMap$SimpleImmutableEntry
+- java/util/AbstractMap$SimpleEntry
+- java/util/HashMap
+- java/util/Set
+- java/util/AbstractSet
+- java/util/HashSet
+- java/util/UUID
+- java/io/FileDescriptor

@@ -25,6 +25,12 @@ extension Optional: JObjectConvertible, JConvertible, JParameterConvertible wher
     }
     return nil
   }
+
+  public func deleteJavaObject(_ obj: JavaObject?) {
+    if let this = self {
+      this.deleteJavaObject(obj)
+    }
+  }
 }
 
 

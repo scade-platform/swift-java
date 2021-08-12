@@ -74,7 +74,10 @@ public final class JClass : JObject {
   }
   
   public func create(ctor: JavaMethodID, _ args: JParameterConvertible...) -> JavaObject {
-    return create(ctor: ctor, args.map{$0.toJavaParameter()})
+    let params = makeJavaParameterArray(args)
+    let res = create(ctor: ctor, params)
+    deleteJavaParameterArray(args, params)
+    return res
   }
   
   public func create(_ args: JConvertible...) -> JavaObject {
@@ -82,7 +85,10 @@ public final class JClass : JObject {
     guard let ctorId = getMethodID(name: "<init>", sig: "(\(sig))V") else {
       fatalError("Cannot find constructor with signature (\(sig))V")
     }
-    return create(ctor: ctorId, args.map{$0.toJavaParameter()})
+    let params = makeJavaParameterArray(args)
+    let res = create(ctor: ctorId, params)
+    deleteJavaParameterArray(args, params)
+    return res;
   }
   
   
@@ -121,7 +127,9 @@ public final class JClass : JObject {
   }
 
   public func callStatic(method: JavaMethodID, _ args : JParameterConvertible...) -> Void {
-    callStatic(method:method, args.map{$0.toJavaParameter()})
+    let params = makeJavaParameterArray(args)
+    callStatic(method:method, params)
+    deleteJavaParameterArray(args, params)
   }
 
   public func callStatic(method: String, _ args : JConvertible...) -> Void {
@@ -141,7 +149,10 @@ public final class JClass : JObject {
     guard let methodId = getStaticMethodID(name: method, sig: sig) else  {
       fatalError("Cannot find static method \(method) with signature \(sig)")
     }
-    callStatic(method: methodId, args.map{$0.toJavaParameter()}) as Void      
+
+    let params = makeJavaParameterArray(args)
+    callStatic(method: methodId, params) as Void
+    deleteJavaParameterArray(args, params)
   }
       
 
@@ -152,7 +163,10 @@ public final class JClass : JObject {
   }
 
   public func callStatic<T: JConvertible>(method: JavaMethodID, _ args: JParameterConvertible...) -> T {
-    return callStatic(method: method, args.map{$0.toJavaParameter()})
+    let params = makeJavaParameterArray(args)
+    let res = callStatic(method: method, params) as T
+    deleteJavaParameterArray(args, params)
+    return res
   }
 
   public func callStatic<T>(method: String, _ args : JConvertible...) -> T where T: JConvertible {
@@ -172,7 +186,10 @@ public final class JClass : JObject {
     guard let methodId = getStaticMethodID(name: method, sig: sig) else  {
       fatalError("Cannot find static method \(method) with signature \(sig)")
     }
-    return callStatic(method: methodId, args.map{$0.toJavaParameter()})        
+    let params = makeJavaParameterArray(args)
+    let res = callStatic(method: methodId, params) as T
+    deleteJavaParameterArray(args, params)
+    return res
   }         
 }
 
@@ -204,7 +221,7 @@ public func findJavaClass(fqn: String) -> JClass? {
 internal func getJavaClass<T: ObjectProtocol>(from type: T.Type) -> JClass {
   let typeId = ObjectIdentifier(type)
   guard let fqn = __swiftClassToClassname[typeId] else {
-    let fqn = String(String(reflecting: type).map {
+    let fqn = "com/scadefusion/" + String(String(reflecting: type).map {
       $0 == "." ? "/" : $0
     })
     print("Looking for Java class \(fqn)")

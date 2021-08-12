@@ -9,8 +9,21 @@ import CJNI
 
 public protocol JParameterConvertible {
   func toJavaParameter()  -> JavaParameter
+  func deleteJavaParameter(_ par: JavaParameter)
 }
 
+
+// Converts collection of JParameterConvertible to array of java parameters
+public func makeJavaParameterArray(_ args: [JParameterConvertible]) -> [JavaParameter] {
+  return args.map{$0.toJavaParameter()}
+}
+
+// Deletes all java parameters in array created with makeJavaParameterArray
+public func deleteJavaParameterArray(_ args: [JParameterConvertible], _ array: [JavaParameter]) {
+  for (index, element) in args.enumerated() {
+    element.deleteJavaParameter(array[index])
+  }
+}
 
 
 public protocol JConvertible: JParameterConvertible {
@@ -27,7 +40,8 @@ public protocol JConvertible: JParameterConvertible {
   
   static func fromJavaObject(_ obj: JavaObject?) -> Self
   func toJavaObject() -> JavaObject?
-  
+  func deleteJavaObject(_ obj: JavaObject?)
+
 //  static func fromJavaArray(_ arr: JavaArray?) -> [Self]
 //  static func toJavaArray(_ arr: [Self]) -> JavaArray?
 }
@@ -79,7 +93,9 @@ extension JObjectConvertible {
   }
   
   public func toField(_ field: JavaFieldID, of obj: JavaObject) -> Void {
-    jni.SetObjectField(env, obj, field, toJavaObject())
+    let jObj = toJavaObject()
+    jni.SetObjectField(env, obj, field, jObj)
+    deleteJavaObject(jObj)
   }
   
   public static func fromStaticField(_ field: JavaFieldID, of cls: JavaClass) -> Self {
@@ -88,7 +104,9 @@ extension JObjectConvertible {
   }
   
   public func toStaticField(_ field: JavaFieldID, of cls: JavaClass) -> Void {
-    jni.SetStaticObjectField(env, cls, field, toJavaObject())
+    let jObj = toJavaObject()
+    jni.SetStaticObjectField(env, cls, field, jObj)
+    deleteJavaObject(jObj)
   }
   
 //  public static func toJavaArray(_ arr: [Self]) -> JavaArray? {
@@ -120,6 +138,10 @@ extension JObjectConvertible {
   
   public func toJavaParameter() -> JavaParameter {
     return JavaParameter(object: toJavaObject())
+  }
+
+  public func deleteJavaParameter(_ par: JavaParameter) {
+    deleteJavaObject(par.object)
   }
 }
 

@@ -72,7 +72,9 @@ public class JObject {
   }
   
   public func call(method: JavaMethodID, _ args : JParameterConvertible...) -> Void {
-    call(method: method, args.map{$0.toJavaParameter()}) as Void
+    let params = makeJavaParameterArray(args)
+    call(method: method, params) as Void
+    deleteJavaParameterArray(args, params)
   }
   
   public func call(method: String, _ args : JConvertible...) -> Void {
@@ -80,7 +82,10 @@ public class JObject {
     guard let methodId = cls.getMethodID(name: method, sig: sig) else  {
       fatalError("Cannot find method \(method) with signature \(sig)")
     }
-    return call(method: methodId, args.map{$0.toJavaParameter()}) as Void
+
+    let params = makeJavaParameterArray(args)
+    call(method: methodId, params) as Void
+    deleteJavaParameterArray(args, params)
   }
   
   
@@ -91,7 +96,10 @@ public class JObject {
   }
   
   public func call<T>(method: JavaMethodID, _ args: JParameterConvertible...) -> T where T: JConvertible {
-    return call(method: method, args.map{$0.toJavaParameter()})
+    let params = makeJavaParameterArray(args)
+    let res = call(method: method, params) as T
+    deleteJavaParameterArray(args, params)
+    return res
   }
   
   public func call<T>(method: String, _ args : JConvertible...) -> T where T: JConvertible {
@@ -99,7 +107,11 @@ public class JObject {
     guard let methodId = cls.getMethodID(name: method, sig: sig) else  {
       fatalError("Cannot find method \(method) with signature \(sig)")
     }
-    return call(method: methodId, args.map{$0.toJavaParameter()})
+
+    let params = makeJavaParameterArray(args)
+    let res = call(method: methodId, params) as T
+    deleteJavaParameterArray(args, params)
+    return res
   }
 }
 

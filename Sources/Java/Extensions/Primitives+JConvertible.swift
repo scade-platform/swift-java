@@ -43,11 +43,23 @@ public protocol JPrimitiveConvertible : JNullInitializable {
 
 extension JPrimitiveConvertible where PrimitiveType.ConvertibleType == Self {
   public func toJavaObject() -> JavaObject? {
+    // It looks like this code never gets executed for now.
+    // And there is bug here: we create global reference and return it,
+    // but it is deleted before function exit.
     return PrimitiveType(self).javaObject.ptr
   }
   
   public static func fromJavaObject(_ obj: JavaObject) -> Self {
     return  PrimitiveType(obj).value
+  }
+
+  public func deleteJavaObject(_ obj: JavaObject?) {
+    // Doing nothing here for now. We need fix the toJavaObject implementation first.
+  }
+
+  public func deleteJavaParameter(_ par: JavaParameter) {
+    // Parametes for primitive types don't contain references to objects
+    // so nothing to do here
   }
 }
 
@@ -393,11 +405,22 @@ extension Int: JPrimitiveConvertible {
   }
   
   public func toJavaObject() -> JavaObject? {
+    // It looks like this code never gets executed for now.
+    // And there is bug here: we create global reference and return it,
+    // but it is deleted before function exit.
     return PrimitiveType(PrimitiveType.ConvertibleType(self)).javaObject.ptr
   }
   
   public func toJavaParameter() -> JavaParameter {
     return Convertible(self).toJavaParameter()
+  }
+
+  public func deleteJavaObject(_ obj: JavaObject?) {
+    // TODO: we need fix toJavaObject implementation first
+  }
+
+  public func deleteJavaParameter(_ par: JavaParameter) {
+    // nothing to do here for parameter containing Int or Long
   }
 }
 
@@ -519,6 +542,10 @@ extension String: JObjectConvertible, JNullInitializable {
   
   public func toJavaObject() -> JavaObject? {
     return jni.NewStringUTF(env, self)
+  }
+
+  public func deleteJavaObject(_ obj: JavaObject?) {
+    jni.DeleteLocalRef(env, obj)
   }
 }
 

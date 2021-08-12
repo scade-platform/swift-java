@@ -58,9 +58,7 @@ extension Array: JParameterConvertible, JConvertible, JNullInitializable, JObjec
       for (index, element) in self.enumerated() {
         if let obj = element.toJavaObject() {
           jni.SetObjectArrayElement(env, res, jsize(index), obj)
-          if jni.GetObjectRefType(env, obj).rawValue == 1 {
-            jni.DeleteLocalRef(env, obj)
-          }
+          element.deleteJavaObject(obj)
         }
       }
       return res
@@ -130,6 +128,10 @@ extension Array: JParameterConvertible, JConvertible, JNullInitializable, JObjec
       fatalError()
     }
   }
-  
+
+  public func deleteJavaObject(_ obj: JavaObject?) {
+    // deleting local reference created in toJavaObject with jni.NewXXXArray
+    jni.DeleteLocalRef(env, obj)
+  }
 }
 

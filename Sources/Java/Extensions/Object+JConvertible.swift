@@ -19,6 +19,11 @@ public extension ObjectProtocol {
     guard let _obj = obj else { fatalError("Cannot instantiate non-null object from nil") }
     return mapJavaObject(_obj)
   }
+
+  func deleteJavaObject(_ obj: JavaObject?) {
+    // nothing to do here because toJavaObject returns existing global refernce
+    // and we should not delete it
+  }
 }
 
 //public extension ObjectProtocol {

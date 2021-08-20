@@ -204,17 +204,26 @@ public func findJavaClass(fqn: String) -> JClass? {
 internal func getJavaClass<T: ObjectProtocol>(from type: T.Type) -> JClass {
   let typeId = ObjectIdentifier(type)
   guard let fqn = __swiftClassToClassname[typeId] else {
-    let fqn = String(String(reflecting: type).map {
+    var fqn = String(String(reflecting: type).map {
       $0 == "." ? "/" : $0
     })
-    print("Looking for Java class \(fqn)")
-    guard let cls = findJavaClass(fqn: fqn) else {
+    
+    print("Looking for Java class \(fqn)")    
+    var cls = findJavaClass(fqn: fqn)
+    
+    if cls == nil {
+      fqn = "com/\(fqn)"
+      cls = findJavaClass(fqn: fqn)
+    }
+        
+    guard let _cls = cls else {
       fatalError("Cannot find Java class '\(fqn)'")
     }
+
     __swiftClassToClassname[typeId] = fqn
     __classnameToSwiftClass[fqn] = type
     
-    return cls
+    return _cls
   }
   
   guard let cls = findJavaClass(fqn: fqn) else {

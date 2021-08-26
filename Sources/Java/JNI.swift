@@ -65,3 +65,9 @@ struct JNIError: Error {
     jni.ExceptionClear(env)
   }
 }
+
+public func detachCurrentThread() {
+  let jvm = __jvm.pointee.pointee
+  let _ = jvm.DetachCurrentThread(__jvm)
+}
+

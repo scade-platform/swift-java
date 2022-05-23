@@ -12,13 +12,13 @@ public protocol Iterator: JObjectConvertible {
 
 public extension Iterator {
   func box() -> IteratorProxy<E> {
-    return IteratorProxy<E>(self)
+    IteratorProxy<E>(self)
   }
 }
 
 public extension Iterator where Self: Object {
   func remove() {
-    return self.javaObject.call(method: Iterator__method__2, [])
+    self.javaObject.call(method: Iterator__method__2, [])
   }
 }
 
@@ -26,19 +26,19 @@ public protocol IteratorProxyProtocol: Iterator where Self: Object {}
 
 public extension IteratorProxyProtocol {
   func hasNext() -> Bool {
-    return self.javaObject.call(method: Iterator__method__0, [])
+    self.javaObject.call(method: Iterator__method__0, [])
   }
 
   func next() -> E? {
-    return self.javaObject.call(method: Iterator__method__1, [])
+    self.javaObject.call(method: Iterator__method__1, [])
   }
 }
 
 public final class IteratorProxy<E: JObjectConvertible>: Object, JInterfaceProxy, IteratorProxyProtocol {
   public typealias Proto = Iterator
 
-  public override class var javaClass: JClass {
-    return Iterator__class
+  override public class var javaClass: JClass {
+    Iterator__class
   }
 
   fileprivate convenience init<P: Iterator>(_ obj: P) where P.E == E {
@@ -48,8 +48,8 @@ public final class IteratorProxy<E: JObjectConvertible>: Object, JInterfaceProxy
 
 // ------------------------------------------------------------------------------------
 
-fileprivate let Iterator__class = findJavaClass(fqn: "java/util/Iterator")!
+private let Iterator__class = findJavaClass(fqn: "java/util/Iterator")!
 
-fileprivate let Iterator__method__0 = Iterator__class.getMethodID(name: "hasNext", sig: "()Z")!
-fileprivate let Iterator__method__1 = Iterator__class.getMethodID(name: "next", sig: "()Ljava/lang/Object;")!
-fileprivate let Iterator__method__2 = Iterator__class.getMethodID(name: "remove", sig: "()V")!
+private let Iterator__method__0 = Iterator__class.getMethodID(name: "hasNext", sig: "()Z")!
+private let Iterator__method__1 = Iterator__class.getMethodID(name: "next", sig: "()Ljava/lang/Object;")!
+private let Iterator__method__2 = Iterator__class.getMethodID(name: "remove", sig: "()V")!

@@ -3,24 +3,28 @@
 open class HashSet<E: JObjectConvertible>: Object, AbstractSet, Java.Set {
   public typealias T = E
 
-  public init<I0, T0>(c: I0?) where I0: Java.Collection, T0: Object, I0.E == T0 {
-    super.init(ctor: HashSet__method__0, [c.toJavaParameter()])
+  override public init() {
+    super.init(ctor: HashSet__method__0, [])
+  }
+
+  public init<T0, T1>(c: T1?) where T0: Object, T1: Java.Collection, T1.E == T0 {
+    super.init(ctor: HashSet__method__1, [c.toJavaParameter()])
   }
 
   public init(initialCapacity: Int32, loadFactor: Float) {
-    super.init(ctor: HashSet__method__1, [initialCapacity.toJavaParameter(), loadFactor.toJavaParameter()])
+    super.init(ctor: HashSet__method__2, [initialCapacity.toJavaParameter(), loadFactor.toJavaParameter()])
   }
 
   public init(initialCapacity: Int32) {
-    super.init(ctor: HashSet__method__2, [initialCapacity.toJavaParameter()])
+    super.init(ctor: HashSet__method__3, [initialCapacity.toJavaParameter()])
   }
 
-  public func iterator<R>() -> R? where R: Java.Iterator, R.E == E {
-    return self.javaObject.call(method: HashSet__method__3, [])
+  open func iterator<R>() -> R? where R: Java.Iterator, R.E == E {
+    self.javaObject.call(method: HashSet__method__4, [])
   }
 
-  public func size() -> Int32 {
-    return self.javaObject.call(method: HashSet__method__4, [])
+  open func size() -> Int32 {
+    self.javaObject.call(method: HashSet__method__5, [])
   }
 
   public required init(_ obj: JavaObject) {
@@ -33,17 +37,18 @@ open class HashSet<E: JObjectConvertible>: Object, AbstractSet, Java.Set {
 }
 
 extension HashSet {
-  public func iterator() -> Java.IteratorProxy<E>? {
-    return self.javaObject.call(method: HashSet__method__3, [])
+  open func iterator() -> Java.IteratorProxy<E>? {
+    self.javaObject.call(method: HashSet__method__4, [])
   }
 }
 
 // ------------------------------------------------------------------------------------
 
-fileprivate let HashSet__class = findJavaClass(fqn: "java/util/HashSet")!
+private let HashSet__class = findJavaClass(fqn: "java/util/HashSet")!
 
-fileprivate let HashSet__method__0 = HashSet__class.getMethodID(name: "<init>", sig: "(Ljava/util/Collection;)V")!
-fileprivate let HashSet__method__1 = HashSet__class.getMethodID(name: "<init>", sig: "(IF)V")!
-fileprivate let HashSet__method__2 = HashSet__class.getMethodID(name: "<init>", sig: "(I)V")!
-fileprivate let HashSet__method__3 = HashSet__class.getMethodID(name: "iterator", sig: "()Ljava/util/Iterator;")!
-fileprivate let HashSet__method__4 = HashSet__class.getMethodID(name: "size", sig: "()I")!
+private let HashSet__method__0 = HashSet__class.getMethodID(name: "<init>", sig: "()V")!
+private let HashSet__method__1 = HashSet__class.getMethodID(name: "<init>", sig: "(Ljava/util/Collection;)V")!
+private let HashSet__method__2 = HashSet__class.getMethodID(name: "<init>", sig: "(IF)V")!
+private let HashSet__method__3 = HashSet__class.getMethodID(name: "<init>", sig: "(I)V")!
+private let HashSet__method__4 = HashSet__class.getMethodID(name: "iterator", sig: "()Ljava/util/Iterator;")!
+private let HashSet__method__5 = HashSet__class.getMethodID(name: "size", sig: "()I")!

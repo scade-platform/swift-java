@@ -1,31 +1,9 @@
 
 
 public protocol AbstractCollection: Java.Collection where Self: Object {
-  func iterator<R>() -> R? where R: Java.Iterator, R.E == E
-
   func size() -> Int32
 
-  func isEmpty() -> Bool
-
-  func contains(o: Object?) -> Bool
-
-  func toArray() -> [Object?]
-
-  func toArray<T>(a: [T?]) -> [T?] where T: Object
-
-  func add(e: E?) -> Bool
-
-  func remove(o: Object?) -> Bool
-
-  func containsAll<T0, T1>(c: T1?) -> Bool where T0: Object, T1: Java.Collection, T1.E == T0
-
-  func addAll<T0, T1>(c: T1?) -> Bool where T0: Object, T1: Java.Collection, T1.E == T0
-
-  func removeAll<T0, T1>(c: T1?) -> Bool where T0: Object, T1: Java.Collection, T1.E == T0
-
-  func retainAll<T0, T1>(c: T1?) -> Bool where T0: Object, T1: Java.Collection, T1.E == T0
-
-  func clear() -> Void
+  func iterator<R>() -> R? where R: Java.Iterator, R.E == T
 }
 
 public extension AbstractCollection {
@@ -97,12 +75,12 @@ open class AbstractCollectionProxy<E: JObjectConvertible>: Object, JInterfacePro
     self.init(obj.toJavaObject()!)
   }
 
-  open func iterator<R>() -> R? where R: Java.Iterator, R.E == E {
-    self.javaObject.call(method: AbstractCollection__method__1, [])
-  }
-
   open func size() -> Int32 {
     self.javaObject.call(method: AbstractCollection__method__2, [])
+  }
+
+  open func iterator<R>() -> R? where R: Java.Iterator, R.E == T {
+    self.javaObject.call(method: Iterable__method__0, [])
   }
 }
 

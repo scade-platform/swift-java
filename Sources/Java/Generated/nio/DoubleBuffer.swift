@@ -15,27 +15,7 @@ public protocol DoubleBuffer: Buffer {
 
   func put(index: Int32, d: Double) -> DoubleBuffer?
 
-  func get(dst: [Double], offset: Int32, length: Int32) -> DoubleBuffer?
-
-  func get(dst: [Double]) -> DoubleBuffer?
-
-  func put(src: DoubleBuffer?) -> DoubleBuffer?
-
-  func put(src: [Double], offset: Int32, length: Int32) -> DoubleBuffer?
-
-  func put(src: [Double]) -> DoubleBuffer?
-
-  func hasArray() -> Bool
-
-  func array() -> [Double]
-
-  func arrayOffset() -> Int32
-
   func compact() -> DoubleBuffer?
-
-  func isDirect() -> Bool
-
-  func compareTo(that: DoubleBuffer?) -> Int32
 }
 
 public extension DoubleBuffer {

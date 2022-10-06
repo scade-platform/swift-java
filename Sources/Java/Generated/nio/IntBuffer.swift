@@ -15,27 +15,7 @@ public protocol IntBuffer: Buffer {
 
   func put(index: Int32, i: Int32) -> IntBuffer?
 
-  func get(dst: [Int32], offset: Int32, length: Int32) -> IntBuffer?
-
-  func get(dst: [Int32]) -> IntBuffer?
-
-  func put(src: IntBuffer?) -> IntBuffer?
-
-  func put(src: [Int32], offset: Int32, length: Int32) -> IntBuffer?
-
-  func put(src: [Int32]) -> IntBuffer?
-
-  func hasArray() -> Bool
-
-  func array() -> [Int32]
-
-  func arrayOffset() -> Int32
-
   func compact() -> IntBuffer?
-
-  func isDirect() -> Bool
-
-  func compareTo(that: IntBuffer?) -> Int32
 }
 
 public extension IntBuffer {

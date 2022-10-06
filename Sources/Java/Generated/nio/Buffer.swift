@@ -1,30 +1,6 @@
 
 
 public protocol Buffer where Self: Object {
-  func capacity() -> Int32
-
-  func position() -> Int32
-
-  func position(newPosition: Int32) -> Buffer?
-
-  func limit() -> Int32
-
-  func limit(newLimit: Int32) -> Buffer?
-
-  func mark() -> Buffer?
-
-  func reset() -> Buffer?
-
-  func clear() -> Buffer?
-
-  func flip() -> Buffer?
-
-  func rewind() -> Buffer?
-
-  func remaining() -> Int32
-
-  func hasRemaining() -> Bool
-
   func isReadOnly() -> Bool
 
   func hasArray() -> Bool

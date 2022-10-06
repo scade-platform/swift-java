@@ -97,24 +97,28 @@ open class Class<T: JObjectConvertible>: Object {
     self.javaObject.call(method: Class__method__23, [])
   }
 
-  open func desiredAssertionStatus() -> Bool {
-    self.javaObject.call(method: Class__method__24, [])
+  open func getResource(name: String) -> URL? {
+    self.javaObject.call(method: Class__method__24, [name.toJavaParameter()])
   }
 
-  open func isEnum() -> Bool {
+  open func desiredAssertionStatus() -> Bool {
     self.javaObject.call(method: Class__method__25, [])
   }
 
-  open func getEnumConstants() -> [T?] {
+  open func isEnum() -> Bool {
     self.javaObject.call(method: Class__method__26, [])
   }
 
+  open func getEnumConstants() -> [T?] {
+    self.javaObject.call(method: Class__method__27, [])
+  }
+
   open func cast(obj: Object?) -> T? {
-    self.javaObject.call(method: Class__method__27, [obj.toJavaParameter()])
+    self.javaObject.call(method: Class__method__28, [obj.toJavaParameter()])
   }
 
   open func asSubclass<U, T0>(clazz: Class<U>?) -> Class<T0>? where U: Object, T0: Object {
-    self.javaObject.call(method: Class__method__28, [clazz.toJavaParameter()])
+    self.javaObject.call(method: Class__method__29, [clazz.toJavaParameter()])
   }
 }
 
@@ -146,8 +150,9 @@ private let Class__method__20 = Class__class.getMethodID(name: "isLocalClass", s
 private let Class__method__21 = Class__class.getMethodID(name: "isMemberClass", sig: "()Z")!
 private let Class__method__22 = Class__class.getMethodID(name: "getClasses", sig: "()[Ljava/lang/Class;")!
 private let Class__method__23 = Class__class.getMethodID(name: "getDeclaredClasses", sig: "()[Ljava/lang/Class;")!
-private let Class__method__24 = Class__class.getMethodID(name: "desiredAssertionStatus", sig: "()Z")!
-private let Class__method__25 = Class__class.getMethodID(name: "isEnum", sig: "()Z")!
-private let Class__method__26 = Class__class.getMethodID(name: "getEnumConstants", sig: "()[Ljava/lang/Object;")!
-private let Class__method__27 = Class__class.getMethodID(name: "cast", sig: "(Ljava/lang/Object;)Ljava/lang/Object;")!
-private let Class__method__28 = Class__class.getMethodID(name: "asSubclass", sig: "(Ljava/lang/Class;)Ljava/lang/Class;")!
+private let Class__method__24 = Class__class.getMethodID(name: "getResource", sig: "(Ljava/lang/String;)Ljava/net/URL;")!
+private let Class__method__25 = Class__class.getMethodID(name: "desiredAssertionStatus", sig: "()Z")!
+private let Class__method__26 = Class__class.getMethodID(name: "isEnum", sig: "()Z")!
+private let Class__method__27 = Class__class.getMethodID(name: "getEnumConstants", sig: "()[Ljava/lang/Object;")!
+private let Class__method__28 = Class__class.getMethodID(name: "cast", sig: "(Ljava/lang/Object;)Ljava/lang/Object;")!
+private let Class__method__29 = Class__class.getMethodID(name: "asSubclass", sig: "(Ljava/lang/Class;)Ljava/lang/Class;")!

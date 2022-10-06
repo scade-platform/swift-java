@@ -6,8 +6,6 @@ public protocol Iterator: JObjectConvertible {
   func hasNext() -> Bool
 
   func next() -> E?
-
-  func remove() -> Void
 }
 
 public extension Iterator {

@@ -28,16 +28,6 @@ public protocol Map: JObjectConvertible {
   func keySet<R>() -> R? where R: Java.Set, R.E == K
 
   func values<R>() -> R? where R: Java.Collection, R.E == V
-
-  func getOrDefault(key: Object?, defaultValue: V?) -> V?
-
-  func putIfAbsent(key: K?, value: V?) -> V?
-
-  func remove(key: Object?, value: Object?) -> Bool
-
-  func replace(key: K?, oldValue: V?, newValue: V?) -> Bool
-
-  func replace(key: K?, value: V?) -> V?
 }
 
 public extension Map {

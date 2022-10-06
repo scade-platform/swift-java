@@ -15,27 +15,7 @@ public protocol ByteBuffer: Buffer {
 
   func put(index: Int32, b: Int8) -> ByteBuffer?
 
-  func get(dst: [Int8], offset: Int32, length: Int32) -> ByteBuffer?
-
-  func get(dst: [Int8]) -> ByteBuffer?
-
-  func put(src: ByteBuffer?) -> ByteBuffer?
-
-  func put(src: [Int8], offset: Int32, length: Int32) -> ByteBuffer?
-
-  func put(src: [Int8]) -> ByteBuffer?
-
-  func hasArray() -> Bool
-
-  func array() -> [Int8]
-
-  func arrayOffset() -> Int32
-
   func compact() -> ByteBuffer?
-
-  func isDirect() -> Bool
-
-  func compareTo(that: ByteBuffer?) -> Int32
 
   func getChar() -> UInt16
 

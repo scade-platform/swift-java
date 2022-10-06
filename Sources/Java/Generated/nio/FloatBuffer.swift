@@ -15,27 +15,7 @@ public protocol FloatBuffer: Buffer {
 
   func put(index: Int32, f: Float) -> FloatBuffer?
 
-  func get(dst: [Float], offset: Int32, length: Int32) -> FloatBuffer?
-
-  func get(dst: [Float]) -> FloatBuffer?
-
-  func put(src: FloatBuffer?) -> FloatBuffer?
-
-  func put(src: [Float], offset: Int32, length: Int32) -> FloatBuffer?
-
-  func put(src: [Float]) -> FloatBuffer?
-
-  func hasArray() -> Bool
-
-  func array() -> [Float]
-
-  func arrayOffset() -> Int32
-
   func compact() -> FloatBuffer?
-
-  func isDirect() -> Bool
-
-  func compareTo(that: FloatBuffer?) -> Int32
 }
 
 public extension FloatBuffer {

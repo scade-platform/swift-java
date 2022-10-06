@@ -15,27 +15,7 @@ public protocol LongBuffer: Buffer {
 
   func put(index: Int32, l: Int64) -> LongBuffer?
 
-  func get(dst: [Int64], offset: Int32, length: Int32) -> LongBuffer?
-
-  func get(dst: [Int64]) -> LongBuffer?
-
-  func put(src: LongBuffer?) -> LongBuffer?
-
-  func put(src: [Int64], offset: Int32, length: Int32) -> LongBuffer?
-
-  func put(src: [Int64]) -> LongBuffer?
-
-  func hasArray() -> Bool
-
-  func array() -> [Int64]
-
-  func arrayOffset() -> Int32
-
   func compact() -> LongBuffer?
-
-  func isDirect() -> Bool
-
-  func compareTo(that: LongBuffer?) -> Int32
 }
 
 public extension LongBuffer {

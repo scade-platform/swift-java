@@ -3,6 +3,8 @@ Java:
 - java/lang/Class
 - java/lang/Iterable
 - java/lang/Object
+- java/net/URI
+- java/net/URL
 - java/nio/Buffer
 - java/nio/ByteBuffer
 - java/nio/DoubleBuffer

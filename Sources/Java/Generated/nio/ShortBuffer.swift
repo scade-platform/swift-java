@@ -15,27 +15,7 @@ public protocol ShortBuffer: Buffer {
 
   func put(index: Int32, s: Int16) -> ShortBuffer?
 
-  func get(dst: [Int16], offset: Int32, length: Int32) -> ShortBuffer?
-
-  func get(dst: [Int16]) -> ShortBuffer?
-
-  func put(src: ShortBuffer?) -> ShortBuffer?
-
-  func put(src: [Int16], offset: Int32, length: Int32) -> ShortBuffer?
-
-  func put(src: [Int16]) -> ShortBuffer?
-
-  func hasArray() -> Bool
-
-  func array() -> [Int16]
-
-  func arrayOffset() -> Int32
-
   func compact() -> ShortBuffer?
-
-  func isDirect() -> Bool
-
-  func compareTo(that: ShortBuffer?) -> Int32
 }
 
 public extension ShortBuffer {

@@ -2,24 +2,6 @@
 
 public protocol AbstractList: AbstractCollection, List {
   func get(index: Int32) -> E?
-
-  func set(index: Int32, element: E?) -> E?
-
-  func add(index: Int32, element: E?) -> Void
-
-  func remove(index: Int32) -> E?
-
-  func indexOf(o: Object?) -> Int32
-
-  func lastIndexOf(o: Object?) -> Int32
-
-  func addAll<T0, T1>(index: Int32, c: T1?) -> Bool where T0: Object, T1: Java.Collection, T1.E == T0
-
-  func iterator<R>() -> R? where R: Java.Iterator, R.E == E
-
-  func subList<R>(fromIndex: Int32, toIndex: Int32) -> R? where R: List, R.E == E
-
-  func removeRange(fromIndex: Int32, toIndex: Int32) -> Void
 }
 
 public extension AbstractList {
